@@ -7,7 +7,7 @@ export default function page() {
   return (
     <div className="bg-color-grey">
       <div className="flex justify-between">
-        <h2>Dashboard</h2>
+        <h2 className="text-2xl font-semibold">Dashboard</h2>
         <SignOutButton>
           <Button className="cursor-pointer" variant="destructive">Logout</Button>
          </SignOutButton>
