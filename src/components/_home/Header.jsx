@@ -6,8 +6,10 @@ import { useState } from "react";
 import { FiMenu, FiX, FiHome, FiStar, FiLogIn } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export function Header() {
+  const { isSignedIn } = useUser();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -41,11 +43,19 @@ export function Header() {
           >
             <FiStar className="mr-1" /> Features
           </Link>
-          <Link href="/sign-in">
-            <Button variant="default" className="ml-4 cursor-pointer">
-              <FiLogIn className="mr-2" /> Login
-            </Button>
-          </Link>
+          {isSignedIn ? (
+            <Link href="/dashboard">
+              <Button variant="default" className="ml-4 cursor-pointer">
+                <FiLogIn className="mr-2" /> Dashboard
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/sign-in">
+              <Button variant="default" className="ml-4 cursor-pointer">
+                <FiLogIn className="mr-2" /> Login
+              </Button>
+            </Link>
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
